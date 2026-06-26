@@ -45,9 +45,9 @@ const displayLevelWords = (words) => {
         let wordDiv = document.createElement("div")
         wordDiv.innerHTML= `
             <div class="bg-white p-5 rounded-lg text-center h-full flex flex-col">
-                <h2 class="text-2xl font-bold">${word.word}</h2>
+                <h2 class="text-2xl font-bold">${word.word ? word.word : "word not found"}</h2>
                 <p>Meaning / Pronunciation</p>
-                <p>${word.meaning} / ${word.pronunciation}</p>
+                <p>${word.meaning ?  word.meaning : "word meaning not found"} / ${word.pronunciation ? word.pronunciation : "pronunciation not found"}</p>
 
                 <div class="flex justify-between mt-auto">
                     <button class="bg-[#1A91FF10] p-2 rounded-sm hover:bg-[#1A91FF80]">
