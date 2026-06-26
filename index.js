@@ -1,8 +1,8 @@
 const loadLessons = () => {
     const url = "https://openapi.programming-hero.com/api/levels/all"
     fetch(url)
-    .then(res => res.json())
-    .then(res => displaylessons(res.data))
+        .then(res => res.json())
+        .then(res => displaylessons(res.data))
 }
 
 const showLevelWords = (id) => {
@@ -16,16 +16,16 @@ const displayLevelWords = (words) => {
     wordContainer.innerHTML = "";
 
     let wordSection = document.getElementById("level-word-section")
-    if(wordSection){
+    if (wordSection) {
         wordSection.remove()
     }
-    
-    if(words.length == 0){
+
+    if (words.length == 0) {
 
         wordContainer.removeAttribute("class")
 
         let wordDiv = document.createElement("div")
-        wordDiv.innerHTML= `
+        wordDiv.innerHTML = `
         <div class="grid text-center gap-3 bg-gray-50 mx-auto p-10 border border-none rounded-lg w-11/12">
         <img src="assets/alert-error.png" alt="" srcset="" class="mx-auto">
         <p class="text-[#79716B] text-sm">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
@@ -34,20 +34,20 @@ const displayLevelWords = (words) => {
         `
         wordContainer.append(wordDiv)
     }
-    
-    
+
+
     // {id: 5, level: 1, word: 'Eager', meaning: 'আগ্রহী', pronunciation: 'ইগার'}
-    
-    for(let word of words){
+
+    for (let word of words) {
 
         wordContainer.setAttribute("class", "bg-gray-50 w-11/12 grid md:grid-cols-3 p-4 mx-auto rounded-lg gap-4")
 
         let wordDiv = document.createElement("div")
-        wordDiv.innerHTML= `
+        wordDiv.innerHTML = `
             <div class="bg-white p-5 rounded-lg text-center h-full flex flex-col">
                 <h2 class="text-2xl font-bold">${word.word ? word.word : "word not found"}</h2>
                 <p>Meaning / Pronunciation</p>
-                <p>${word.meaning ?  word.meaning : "word meaning not found"} / ${word.pronunciation ? word.pronunciation : "pronunciation not found"}</p>
+                <p>${word.meaning ? word.meaning : "word meaning not found"} / ${word.pronunciation ? word.pronunciation : "pronunciation not found"}</p>
 
                 <div class="flex justify-between mt-auto">
                     <button class="bg-[#1A91FF10] p-2 rounded-sm hover:bg-[#1A91FF80]">
@@ -65,19 +65,19 @@ const displayLevelWords = (words) => {
 }
 
 const displaylessons = (lessons) => {
-const levelContainer = document.getElementById("lesson-container");
+    const levelContainer = document.getElementById("lesson-container");
 
-for (let lesson of lessons) {
-    const lessonDiv = document.createElement("div");
-    lessonDiv.innerHTML = `
+    for (let lesson of lessons) {
+        const lessonDiv = document.createElement("div");
+        lessonDiv.innerHTML = `
                 <button id="lesson-btn-${lesson.level_no}" onclick="showLevelWords(${lesson.level_no})"  class="btn btn-outline btn-primary lesson-btn">
                 <i class="fa-solid fa-book-open"></i> Lesson - ${lesson.level_no}
                 </button>
 
     `;
 
-    levelContainer.append(lessonDiv);
-}
+        levelContainer.append(lessonDiv);
+    }
 }
 
 
