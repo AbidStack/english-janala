@@ -12,17 +12,36 @@ const showLevelWords = (id) => {
 
 const displayLevelWords = (words) => {
 
+    const wordContainer = document.getElementById("level-word-container")
+    wordContainer.innerHTML = "";
+
     let wordSection = document.getElementById("level-word-section")
     if(wordSection){
         wordSection.remove()
     }
+    
+    if(words.length == 0){
 
-    const wordContainer = document.getElementById("level-word-container")
-    wordContainer.innerHTML = "";
+        wordContainer.removeAttribute("class")
+
+        let wordDiv = document.createElement("div")
+        wordDiv.innerHTML= `
+        <div class="grid text-center gap-3 bg-gray-50 mx-10 p-10 border border-none rounded-lg w-11/12">
+        <img src="assets/alert-error.png" alt="" srcset="" class="mx-auto">
+        <p class="text-[#79716B] text-sm">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
+        <p class="text-[#292524] text-3xl font-semibold">নেক্সট Lesson এ যান</p>
+        </div>
+        `
+        wordContainer.append(wordDiv)
+    }
+    
     
     // {id: 5, level: 1, word: 'Eager', meaning: 'আগ্রহী', pronunciation: 'ইগার'}
-
+    
     for(let word of words){
+
+        wordContainer.setAttribute("class", "bg-gray-50 w-11/12 grid grid-cols-3 p-4 mx-auto rounded-lg gap-4")
+
         let wordDiv = document.createElement("div")
         wordDiv.innerHTML= `
             <div class="bg-white p-5 rounded-lg text-center h-full flex flex-col">
