@@ -26,7 +26,7 @@ const displayLevelWords = (words) => {
 
         let wordDiv = document.createElement("div")
         wordDiv.innerHTML= `
-        <div class="grid text-center gap-3 bg-gray-50 mx-10 p-10 border border-none rounded-lg w-11/12">
+        <div class="grid text-center gap-3 bg-gray-50 mx-auto p-10 border border-none rounded-lg w-11/12">
         <img src="assets/alert-error.png" alt="" srcset="" class="mx-auto">
         <p class="text-[#79716B] text-sm">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
         <p class="text-[#292524] text-3xl font-semibold">নেক্সট Lesson এ যান</p>
@@ -40,7 +40,7 @@ const displayLevelWords = (words) => {
     
     for(let word of words){
 
-        wordContainer.setAttribute("class", "bg-gray-50 w-11/12 grid grid-cols-3 p-4 mx-auto rounded-lg gap-4")
+        wordContainer.setAttribute("class", "bg-gray-50 w-11/12 grid md:grid-cols-3 p-4 mx-auto rounded-lg gap-4")
 
         let wordDiv = document.createElement("div")
         wordDiv.innerHTML= `
