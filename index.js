@@ -6,24 +6,37 @@ const loadLessons = () => {
 }
 
 const showLevelWords = (id) => {
+    document.querySelectorAll(".lesson-btn").forEach((button) => {
+        button.classList.remove("active");
+    });
+
+    // const selectedButton = document.getElementById(`lesson-btn-${id}`);
+    // if (selectedButton) {
+    //     selectedButton.classList.add("active");
+    // }
+
+    document.getElementById(`lesson-btn-${id}`).classList.add("active")
+
     const url = `https://openapi.programming-hero.com/api/level/${id}`;
     fetch(url).then(res => res.json()).then(data => displayLevelWords(data.data))
 }
 
 const displayLevelWords = (words) => {
-
+    
+    
+    
     const wordContainer = document.getElementById("level-word-container")
     wordContainer.innerHTML = "";
-
+    
     let wordSection = document.getElementById("level-word-section")
     if (wordSection) {
         wordSection.remove()
     }
-
+    
     if (words.length == 0) {
-
+        
         wordContainer.removeAttribute("class")
-
+        
         let wordDiv = document.createElement("div")
         wordDiv.innerHTML = `
         <div class="grid text-center gap-3 bg-gray-50 mx-auto p-10 border border-none rounded-lg w-11/12">
@@ -56,8 +69,8 @@ const displayLevelWords = (words) => {
                     <button class="bg-[#1A91FF10] p-2 rounded-sm hover:bg-[#1A91FF80]">
                         <i class="fa-solid fa-volume-high"></i>
                     </button>
-                </div>
-            </div>
+                    </div>
+                    </div>
         `
         wordContainer.append(wordDiv)
 
@@ -65,12 +78,14 @@ const displayLevelWords = (words) => {
 }
 
 const displaylessons = (lessons) => {
+    // document.querySelectorAll(lesson-btn).forEach(elem => elem.classList.remove("active"))
     const levelContainer = document.getElementById("lesson-container");
 
     for (let lesson of lessons) {
         const lessonDiv = document.createElement("div");
+        // lessonDiv.classList.add("active");
         lessonDiv.innerHTML = `
-                <button id="lesson-btn-${lesson.level_no}" onclick="showLevelWords(${lesson.level_no})"  class="btn btn-outline btn-primary lesson-btn">
+                <button id="lesson-btn-${lesson.level_no}" onclick="showLevelWords(${lesson.level_no})" class="btn btn-outline btn-primary lesson-btn">
                 <i class="fa-solid fa-book-open"></i> Lesson - ${lesson.level_no}
                 </button>
 
