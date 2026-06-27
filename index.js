@@ -50,7 +50,7 @@ const displayLevelWords = (words) => {
                 <p>${word.meaning ? word.meaning : "word meaning not found"} / ${word.pronunciation ? word.pronunciation : "pronunciation not found"}</p>
 
                 <div class="flex justify-between mt-auto">
-                    <button class="bg-[#1A91FF10] p-2 rounded-sm hover:bg-[#1A91FF80]">
+                    <button onclick="my_modal_5.showModal()" class="bg-[#1A91FF10] p-2 rounded-sm hover:bg-[#1A91FF80]">
                         <i class="fa-solid fa-circle-info"></i>
                     </button>
                     <button class="bg-[#1A91FF10] p-2 rounded-sm hover:bg-[#1A91FF80]">
