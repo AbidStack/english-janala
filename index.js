@@ -1,99 +1,149 @@
-const loadLessons = () => {
-    const url = "https://openapi.programming-hero.com/api/levels/all"
-    fetch(url)
-        .then(res => res.json())
-        .then(res => displaylessons(res.data))
-}
+const API_BASE_URL = "https://openapi.programming-hero.com/api";
 
-const showLevelWords = (id) => {
+const fetchData = async (endpoint) => {
+    const response = await fetch(`${API_BASE_URL}${endpoint}`);
+
+    if (!response.ok) {
+        throw new Error(`Request failed with status ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.data ?? [];
+};
+
+const setActiveLesson = (lessonId) => {
     document.querySelectorAll(".lesson-btn").forEach((button) => {
-        button.classList.remove("active");
+        button.classList.toggle("active", button.id === `lesson-btn-${lessonId}`);
     });
+};
 
-    // const selectedButton = document.getElementById(`lesson-btn-${id}`);
-    // if (selectedButton) {
-    //     selectedButton.classList.add("active");
-    // }
+const loadLessons = async () => {
+    try {
+        const lessons = await fetchData("/levels/all");
+        displayLessons(lessons);
+    } catch (error) {
+        console.error("Failed to load lessons:", error);
+    }
+};
 
-    document.getElementById(`lesson-btn-${id}`).classList.add("active")
+const showWordDetails = async (id) => {
+    const modal = document.getElementById("my_modal_5");
+    const wordDetailsContainer = document.getElementById("wordDetailsContainer");
 
-    const url = `https://openapi.programming-hero.com/api/level/${id}`;
-    fetch(url).then(res => res.json()).then(data => displayLevelWords(data.data))
-}
+    if (!modal || !wordDetailsContainer) return;
 
-const displayLevelWords = (words) => {
-    
-    
-    
-    const wordContainer = document.getElementById("level-word-container")
+    modal.showModal();
+    wordDetailsContainer.innerHTML = '<p class="text-sm text-gray-500">Loading word details...</p>';
+
+    try {
+        const word = await fetchData(`/word/${id}`);
+        const synonymsMarkup = (word.synonyms || [])
+            .map((syn) => `
+                <button type="button" class="bg-[#68acf020] p-2 border border-gray-200 rounded-sm">
+                    ${syn}
+                </button>
+            `)
+            .join("");
+
+        wordDetailsContainer.innerHTML = `
+            <div class="border border-[#EDF7FF] rounded-lg p-4">
+                <h3 class="text-lg font-bold">${word.word || "Word not found"} (${word.pronunciation || "N/A"})</h3>
+                <h4 class="py-4">Meaning</h4>
+                <p>${word.meaning || "Meaning not found"}</p>
+                <h4 class="py-4">Example</h4>
+                <p>${word.sentence || "Example not found"}</p>
+                <h4 class="py-4">সমার্থক শব্দ গুলো</h4>
+                <div class="max-sm:grid flex gap-4 mt-2">
+                    ${synonymsMarkup || '<p class="text-sm text-gray-500">No synonyms available</p>'}
+                </div>
+            </div>
+        `;
+    } catch (error) {
+        console.error("Failed to load word details:", error);
+        wordDetailsContainer.innerHTML = '<p class="text-red-500">Failed to load word details.</p>';
+    }
+};
+
+const showLevelWords = async (id) => {
+    setActiveLesson(id);
+
+    const wordContainer = document.getElementById("level-word-container");
+    const wordSection = document.getElementById("level-word-section");
+
+    if (!wordContainer) return;
+
     wordContainer.innerHTML = "";
-    
-    let wordSection = document.getElementById("level-word-section")
-    if (wordSection) {
-        wordSection.remove()
+    wordSection?.remove();
+
+    try {
+        const words = await fetchData(`/level/${id}`);
+        displayLevelWords(words);
+    } catch (error) {
+        console.error("Failed to load level words:", error);
+        wordContainer.innerHTML = '<p class="text-red-500">Failed to load words.</p>';
     }
-    
-    if (words.length == 0) {
-        
-        wordContainer.removeAttribute("class")
-        
-        let wordDiv = document.createElement("div")
-        wordDiv.innerHTML = `
-        <div class="grid text-center gap-3 bg-gray-50 mx-auto p-10 border border-none rounded-lg w-11/12">
-        <img src="assets/alert-error.png" alt="" srcset="" class="mx-auto">
-        <p class="text-[#79716B] text-sm">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
-        <p class="text-[#292524] text-3xl font-semibold">নেক্সট Lesson এ যান</p>
-        </div>
-        `
-        wordContainer.append(wordDiv)
+};
+
+const displayLevelWords = (words = []) => {
+    const wordContainer = document.getElementById("level-word-container");
+
+    if (!wordContainer) return;
+
+    if (!Array.isArray(words) || words.length === 0) {
+        wordContainer.className = "";
+        wordContainer.innerHTML = `
+            <div class="grid text-center gap-3 bg-gray-50 mx-auto p-10 border border-none rounded-lg w-11/12">
+                <img src="assets/alert-error.png" alt="" class="mx-auto">
+                <p class="text-[#79716B] text-sm">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
+                <p class="text-[#292524] text-3xl font-semibold">নেক্সট Lesson এ যান</p>
+            </div>
+        `;
+        return;
     }
 
+    wordContainer.className = "bg-gray-50 w-11/12 grid md:grid-cols-3 p-4 mx-auto rounded-lg gap-4";
+    wordContainer.innerHTML = "";
 
-    // {id: 5, level: 1, word: 'Eager', meaning: 'আগ্রহী', pronunciation: 'ইগার'}
-
-    for (let word of words) {
-
-        wordContainer.setAttribute("class", "bg-gray-50 w-11/12 grid md:grid-cols-3 p-4 mx-auto rounded-lg gap-4")
-
-        let wordDiv = document.createElement("div")
+    words.forEach((word) => {
+        const wordDiv = document.createElement("div");
         wordDiv.innerHTML = `
             <div class="bg-white p-5 rounded-lg text-center h-full flex flex-col">
-                <h2 class="text-2xl font-bold">${word.word ? word.word : "word not found"}</h2>
+                <h2 class="text-2xl font-bold">${word.word || "word not found"}</h2>
                 <p>Meaning / Pronunciation</p>
-                <p>${word.meaning ? word.meaning : "word meaning not found"} / ${word.pronunciation ? word.pronunciation : "pronunciation not found"}</p>
+                <p>${word.meaning || "word meaning not found"} / ${word.pronunciation || "pronunciation not found"}</p>
 
                 <div class="flex justify-between mt-auto">
-                    <button onclick="my_modal_5.showModal()" class="bg-[#1A91FF10] p-2 rounded-sm hover:bg-[#1A91FF80]">
+                    <button onclick="showWordDetails(${word.id})" class="bg-[#1A91FF10] p-2 rounded-sm hover:bg-[#1A91FF80]">
                         <i class="fa-solid fa-circle-info"></i>
                     </button>
                     <button class="bg-[#1A91FF10] p-2 rounded-sm hover:bg-[#1A91FF80]">
                         <i class="fa-solid fa-volume-high"></i>
                     </button>
-                    </div>
-                    </div>
-        `
-        wordContainer.append(wordDiv)
+                </div>
+            </div>
+        `;
 
-    }
-}
+        wordContainer.appendChild(wordDiv);
+    });
+};
 
-const displaylessons = (lessons) => {
-    // document.querySelectorAll(lesson-btn).forEach(elem => elem.classList.remove("active"))
+const displayLessons = (lessons = []) => {
     const levelContainer = document.getElementById("lesson-container");
 
-    for (let lesson of lessons) {
+    if (!levelContainer) return;
+
+    levelContainer.innerHTML = "";
+
+    lessons.forEach((lesson) => {
         const lessonDiv = document.createElement("div");
-        // lessonDiv.classList.add("active");
         lessonDiv.innerHTML = `
-                <button id="lesson-btn-${lesson.level_no}" onclick="showLevelWords(${lesson.level_no})" class="btn btn-outline btn-primary lesson-btn">
+            <button id="lesson-btn-${lesson.level_no}" onclick="showLevelWords(${lesson.level_no})" class="btn btn-outline btn-primary lesson-btn">
                 <i class="fa-solid fa-book-open"></i> Lesson - ${lesson.level_no}
-                </button>
+            </button>
+        `;
 
-    `;
+        levelContainer.appendChild(lessonDiv);
+    });
+};
 
-        levelContainer.append(lessonDiv);
-    }
-}
-
-
-loadLessons()
+loadLessons();
