@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>English Janala | Best English Learning Platform</title>
+
+        <!-- stylesheet -->
+        <link rel="stylesheet" href="style/style.css">
+
+        <!-- daisyui + tailwind css cdn  -->
+        <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+        <!-- hind siliguri + poppins font + tiro bangla -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&    family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1, 400;1,500;1,600;1,700;1,800;1,900&family=Tiro+Bangla:ital@0;1&display=swap"
+                rel="stylesheet">
+
+        <!-- font awesome cdn -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+                crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<body class="poppins-font w-[100vw]">
+
+        <!-- header -->
+
+        <div class="border border-gray-400 px-16 py-4 bg-[#BADEFF40] flex flex-wrap md:justify-between">
+                <div class="flex items-center mx-auto md:mx-0">
+                        <p class="poppins-font font-semibold">English</p>
+                        <img src="assets/logo.png" alt="English Janala Logo">
+                        <p class="tiro-bangla-font">জানালা</p>
+                </div>
+                <div class="flex mx-auto md:mx-0">
+                        <button class="border p-2 m-2 rounded-sm text-[#422AD5]"><i
+                                        class="fa-solid fa-circle-question mr-2"></i>FAQ</button>
+                        <button class="border p-2 m-2 rounded-sm text-[#422AD5]"><i
+                                        class="fa-solid fa-book-open mr-2"></i>Learn</button>
+                        <button class="border p-2 m-2 rounded-sm text-[#422AD5]"><i
+                                        class="fa-solid fa-arrow-right-from-bracket mr-2"></i>Logout</button>
+                </div>
+        </div>
+
+        <!-- heading and hero image -->
+
+        <div class="mx-10 grid md:grid-cols-2 items-center gap-40 mb-60">
+                <div class="">
+                        <div class="">
+                                <h1 class="font-bold text-4xl my-6"><span class="text-[#00BCFF]">English</span> is
+                                        Easy!!</h1>
+                                <p class="hind-siliguri-font">আজ থেকেই আপনার ভাষা শেখার যাত্রা শুরু করুন। আপনি যদি নতুন
+                                        হন অথবা আপনার দক্ষতা বাড়াতে চান, আমাদের Interactive Lessons আপনাকে নিয়ে যাবে
+                                        অন্য একটি Level এ</p>
+                        </div>
+                        <div>
+                                <input type="text" name="" id="" placeholder="Enter Your Name"
+                                        class="p-2 mt-4 w-80 border border-gray-300 rounded-sm"><br>
+                                <input type="text" name="" id="" placeholder="............."
+                                        class="p-2 mt-4 w-80 border border-gray-300 rounded-sm my-4"><br>
+                                <button type="button" class="border rounded-sm p-2 bg-[#422AD5] text-white px-4">Get
+                                        Started</button>
+                        </div>
+                </div>
+                <div class="">
+                        <img src="assets/hero-student.png" alt="" class="object-fill">
+                </div>
+        </div>
+
+        <!-- lesson content -->
+
+        <div class="mb-20">
+                <div class="grid items-center">
+                        <p class="font-extrabold text-3xl text-center"><span class="text-[#00BCFF]">Let's </span>Learn
+                                Vocabularies</p>
+
+                        <!-- levels appears here -->
+                        <div id="lesson-container" class="flex flex-wrap justify-center my-4 gap-4 w-11/12"></div>
+                </div>
+
+                <!-- words appears here -->
+                <div id="level-word-container"></div>
+
+                <div id="level-word-section"
+                        class="grid text-center gap-3 bg-gray-50 mx-auto p-10 border border-none rounded-lg w-11/12">
+                        <p class="text-[#79716B] text-sm">আপনি এখনো কোন Lesson Select করেন ন!</p>
+                        <p class="text-[#292524] text-3xl font-semibold">একটি Lesson Select করুন।</p>
+                </div>
+
+                <!-- <div id="level-word-section" class="grid text-center gap-3 bg-gray-50 mx-10 p-10 border border-none rounded-lg w-11/12">
+           <img src="assets/alert-error.png" alt="" srcset="" class="mx-auto">
+           <p class="text-[#79716B] text-sm">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
+           <p class="text-[#292524] text-3xl font-semibold">নেক্সট Lesson এ যান</p>
+       </div> -->
+
+
+        </div>
+
+        <!-- faq  -->
+
+        <div class="m-10">
+
+                <p class="font-extrabold text-3xl text-center m-10"><span class="text-[#00BCFF]">Frequently </span>Asked
+                        Questions</p>
+
+                <div class="grid gap-2">
+                        <div class="bg-gray-50 p-4 border border-none rounded-lg">
+                                <div class="flex justify-between">
+                                        <p class="font-bold mb-2">1. How can I start learning English on this website?
+                                        </p>
+                                        <i class="fa-solid fa-minus size-1 items-start text-[10px]"></i>
+                                </div>
+                                <p class="text-gray-500">You can start by exploring our beginner lessons, interactive
+                                        exercises, and quizzes. We also offer structured courses to guide you step by
+                                        step.</p>
+                        </div>
+                        <div class="bg-gray-50 p-4 border border-none rounded-lg flex justify-between">
+                                <p class="font-bold mb-2">2. Is this website free to use?</p>
+                                <i class="fa-solid fa-plus size-1 items-start text-[10px]"></i>
+                        </div>
+                        <div class="bg-gray-50 p-4 border border-none rounded-lg flex justify-between">
+                                <p class="font-bold mb-2">3. Do I need to create an account?</p>
+                                <i class="fa-solid fa-plus size-1 items-start text-[10px]"></i>
+                        </div>
+                        <div class="bg-gray-50 p-4 border border-none rounded-lg flex justify-between">
+                                <p class="font-bold mb-2">4. How can I build my English vocabulary?</p>
+                                <i class="fa-solid fa-plus size-1 items-start text-[10px]"></i>
+                        </div>
+                        <div class="bg-gray-50 p-4 border border-none rounded-lg flex justify-between">
+                                <p class="font-bold mb-2">5. Do you offer certificates for completed courses?</p>
+                                <i class="fa-solid fa-plus size-1 items-start text-[10px]"></i>
+                        </div>
+                </div>
+        </div>
+
+        <!-- footer  -->
+
+        <footer>
+                <div class="border border-gray-400 p-16 bg-[#BADEFF40] flex justify-between">
+                        <div class="items-center">
+                                <p class="poppins-font font-semibold my-2">English
+                                        <img src="assets/logo.png" alt="English Janala Logo" class="inline-block">
+                                        <span class="tiro-bangla-font font-medium">জানালা</span>
+                                </p>
+                                <p class="tiro-bangla-font font-medium">ইংরেজি শিখুন সহজে</p>
+                                <p class="poppins-font text-[10px]">Providing ED-Tech Applications since 2025</p>
+                        </div>
+                        <div class="self-end">
+                                <div class="md:self-end">
+                                        <p class="poppins-font text-[8px] text-gray-600 my-1 text-left">FOLLOW US</p>
+                                        <div class="text-2xl">
+                                                <div class="text-2xl flex max-sm:flex-col">
+                                                        <i class="fa-brands fa-facebook"></i>
+                                                        <i class="fa-brands fa-youtube max-sm:my-2"></i>
+                                                        <i class="fa-brands fa-instagram"></i>
+                                                </div>
+                                        </div>
+                                </div>
+        </footer>
+
+        
+        <!-- Open the modal using ID.showModal() method -->
+        <!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
+        <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+                <div class="modal-box">
+                        <div id="wordDetailsContainer" class="border border-[#EDF7FF] rounded-lg p-4">
+                                
+                                <h3 class="text-lg font-bold">Eager ( :ইগার)</h3>
+                                <h4 class="py-4">Meaning</p>
+                                        <p>agrohi</p>
+                                        <h4 class="py-4">Example</p>
+                                                <p>The kids were eager to play</p>
+                                                <h4 class="py-4">সমার্থক শব্দ গুলো</p>
+                                                        <div class="max-sm:grid flex gap-4 mt-2">
+                                                                <button type="button"
+                                                                class="bg-[#68acf020] p-2 border border-gray-200 rounded-sm">Enthusiastic</button>
+                                                                <button type="button"
+                                                                        class="bg-[#68acf020] p-2 border border-gray-200 rounded-sm">Enthusiastic</button>
+                                                                <button type="button"
+                                                                        class="bg-[#68acf020] p-2 border border-gray-200 rounded-sm">Enthusiastic</button>
+                                                        </div>
+                        </div>
+                        <div class="modal-action">
+                                <form method="dialog" class="mx-auto">
+                                        <!-- if there is a button in form, it will close the modal -->
+                                        <button class="btn bg-[#422AD5] text-white rounded-lg">Complete Learning</button>
+                                </form>
+                        </div>
+                </div>
+        </dialog>
+        
+
+        <!-- script file added  -->
+        <script src="my-js-code.js"></script>
+
+</body>
+
+</html>

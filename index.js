@@ -116,7 +116,7 @@ const displayLevelWords = (words = []) => {
                     <button onclick="showWordDetails(${word.id})" class="bg-[#1A91FF10] p-2 rounded-sm hover:bg-[#1A91FF80]">
                         <i class="fa-solid fa-circle-info"></i>
                     </button>
-                    <button class="bg-[#1A91FF10] p-2 rounded-sm hover:bg-[#1A91FF80]">
+                    <button onclick="pronounceWord('${word.word}')" class="bg-[#1A91FF10] p-2 rounded-sm hover:bg-[#1A91FF80]">
                         <i class="fa-solid fa-volume-high"></i>
                     </button>
                 </div>
@@ -145,5 +145,11 @@ const displayLessons = (lessons = []) => {
         levelContainer.appendChild(lessonDiv);
     });
 };
+
+function pronounceWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-EN"; // English
+  window.speechSynthesis.speak(utterance);
+}
 
 loadLessons();
