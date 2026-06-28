@@ -1,2 +1,9 @@
 my-js-code.js
 my-code.js
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
